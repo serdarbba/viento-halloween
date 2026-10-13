@@ -441,7 +441,7 @@ textarea{resize:vertical;min-height:70px}
       <h2 class="etk-ad">Halloween <span class="el">Night at Sota</span></h2>
       <div class="etk-saat">
         <span>19:30 – 01:00</span>
-        <span>DJ · Oldies but Goldies</span>
+        <span>DJ Atakan · Oldies but Goldies</span>
         <span>Halloween atmosferi</span>
       </div>
     </div>
@@ -450,8 +450,8 @@ textarea{resize:vertical;min-height:70px}
         <p class="slogan">Dress up · Dine · Dance</p>
         <p class="giris">Geleneksel Halloween gecemizde buluşuyoruz.</p>
         <p class="nostalji">Biraz gizem, biraz şıklık, bolca nostalji…</p>
-        <p>31 Ekim gecesi Sota'da ışıklar kısılıyor, müzik yükseliyor. Oldies but
-           Goldies ile geçmişin unutulmaz şarkılarına dönüyor, gecenin ritmine
+        <p>31 Ekim gecesi Sota'da ışıklar kısılıyor, müzik yükseliyor. DJ Atakan ile Oldies but
+           Goldies — geçmişin unutulmaz şarkılarına dönüyor, gecenin ritmine
            kapılıyoruz.</p>
         <p class="kisik">İster geceye özel hazırladığımız menüyle uzun bir akşam
            yemeğinin tadını çıkarın, ister kokteylinizi alıp doğrudan eğlenceye katılın.</p>
@@ -542,7 +542,7 @@ textarea{resize:vertical;min-height:70px}
         </li>
       </ul>
       <div class="fiyat-tablo">
-        <div class="ana"><span>1 yetişkin + 1 çocuk</span><span>4.000 TL</span></div>
+        <div class="ana"><span>İki kişi</span><span>4.000 TL</span></div>
         <div><span>İlave yetişkin</span><span>2.000 TL</span></div>
         <div><span>İlave çocuk</span><span>1.500 TL</span></div>
       </div>
@@ -807,12 +807,16 @@ textarea{resize:vertical;min-height:70px}
     }
   }
 
+  /* Temel paket İKİ KİŞİ 4.000 TL — yetişkin/çocuk ayrımı yok.
+     Üçüncü kişiden itibaren: yetişkin +2.000, çocuk +1.500.
+     İşletme teyidi (13 Eki): 2 yetişkin + 1 çocuk = 5.500 TL. */
   function brunchTutar(kisiSayisi, cocuk){
-    var yetiskin = Math.max(0, kisiSayisi - cocuk);
-    if (yetiskin >= 1 && cocuk >= 1)
-      return UCRET.brunchTemel + (yetiskin-1)*UCRET.brunchEkYetiskin + (cocuk-1)*UCRET.brunchEkCocuk;
-    if (cocuk === 0) return yetiskin * UCRET.brunchEkYetiskin;
-    return cocuk * UCRET.brunchEkCocuk;
+    var k = Math.max(1, kisiSayisi);
+    if (k <= 2) return UCRET.brunchTemel;
+    var yetiskin = Math.max(0, k - cocuk);
+    var ekCocuk = Math.max(0, Math.min(cocuk, k - 2));
+    var ekYetiskin = Math.max(0, (k - 2) - ekCocuk);
+    return UCRET.brunchTemel + ekCocuk*UCRET.brunchEkCocuk + ekYetiskin*UCRET.brunchEkYetiskin;
   }
 
   function hesapla(){
