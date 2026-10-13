@@ -340,6 +340,25 @@ textarea{resize:vertical;min-height:70px}
   background:linear-gradient(180deg,rgba(13,10,15,.25) 0 40%,rgba(26,21,30,.95) 100%);
 }
 
+
+.rozet{
+  display:inline-flex;align-items:center;gap:6px;vertical-align:middle;
+  font-family:var(--govde);font-size:.63rem;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--alev-sicak);border:1px solid rgba(255,122,26,.42);border-radius:2px;
+  padding:4px 8px;white-space:nowrap;font-weight:400;
+}
+.tesis-yazi .alt-marka{
+  margin:4px 0 12px;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--alev-sicak);
+}
+.sota-satir{
+  margin:16px 0 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  font-size:.92rem;color:var(--kemik);
+}
+.sota-satir b{font-family:var(--baslik);letter-spacing:.07em;font-weight:600}
+.tip-sec.uclu{grid-template-columns:repeat(3,1fr)}
+@media (max-width:520px){.tip-sec.uclu{grid-template-columns:1fr}}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
@@ -354,7 +373,7 @@ textarea{resize:vertical;min-height:70px}
     <div class="ay" aria-hidden="true"></div>
     <p class="eyebrow">Viento Alaçatı</p>
     <h1>HALLOWEEN</h1>
-    <p class="yer"><b>Viento Alaçatı</b>'da iki ayrı program · Sota mutfağından</p>
+    <p class="yer"><b>Viento Alaçatı</b>'da iki ayrı davet</p>
     <div class="ikili">
       <span>31 Ekim Cumartesi · Gece Partisi</span>
       <span>1 Kasım Pazar · Brunch &amp; Etkinlik</span>
@@ -368,15 +387,12 @@ textarea{resize:vertical;min-height:70px}
     </div>
     <div class="tesis-yazi">
       <h2>Viento Alaçatı</h2>
-      <p>Yüz yılı aşkın taş duvarlı bir Alaçatı konağında, çarşıya bir dakika yürüme
-         mesafesinde butik otel. Hem otelimiz hem de mutfağımız Sota Alaçatı
-         MICHELIN Guide seçkisinde yer alıyor. Halloween programı otelin
-         bahçesinde ve Sota mutfağında.</p>
+      <p class="alt-marka">MICHELIN Hotel Selection</p>
+      <p>Yüz yıllık taş duvarlar, Alaçatı'nın göbeğinde sessiz bir bahçe.</p>
+      <p class="sota-satir"><b>Sota Alaçatı</b> <span class="rozet">MICHELIN Guide</span></p>
       <ul class="ozellik">
-        <li class="vurgu">Otel · MICHELIN Guide seçkisinde</li>
-        <li class="vurgu">Sota · MICHELIN Guide seçkisinde</li>
-        <li>Alaçatı merkez · çarşıya 1 dakika</li>
-        <li>Açık havuz ve bahçe</li>
+        <li>Çarşıya bir dakika</li>
+        <li>Havuz ve bahçe</li>
       </ul>
       <p class="konum">Alaçatı, 11039. Sokak No:18, Çeşme / İzmir ·
         <a href="https://maps.app.goo.gl/aMeFat4hvoJSphNJ7" target="_blank" rel="noopener">haritada aç</a>
@@ -393,9 +409,8 @@ textarea{resize:vertical;min-height:70px}
       <div class="etk-saat">
         <span>19:30 – 01:00</span>
         <span>DJ · Oldies but Goldies</span>
-        <span>Kostüm</span>
       </div>
-      <p class="etk-aciklama">Halloween temalı gece; DJ performansı gece birde sona eriyor. İki şekilde katılabilirsiniz.</p>
+      <p class="etk-aciklama">Gece boyunca Oldies but Goldies. Sofranızı iki şekilde kurabilirsiniz.</p>
     </div>
     <div class="ic">
       <div class="secenekler">
@@ -407,7 +422,7 @@ textarea{resize:vertical;min-height:70px}
           </div>
           <div class="kurs">
             <h4>Başlangıç</h4>
-            <p class="secim-notu">Üç seçenekten ikisi</p>
+            <p class="secim-notu">İki seçim</p>
             <div class="kalem"><div class="ad">Mantarlı Humus</div></div>
             <div class="kalem"><div class="ad">Marine Sardalya</div></div>
             <div class="kalem"><div class="ad">Ege Otları</div></div>
@@ -426,7 +441,7 @@ textarea{resize:vertical;min-height:70px}
             <h4>Tatlı</h4>
             <div class="kalem">
               <div class="ad">Katmer</div>
-              <div class="alt">Antep fıstıklı ve kaymaklı</div>
+              <div class="alt">Antep fıstıklı, kaymaklı</div>
             </div>
           </div>
         </div>
@@ -440,16 +455,16 @@ textarea{resize:vertical;min-height:70px}
             <h4>Sofrada</h4>
             <div class="kalem">
               <div class="ad">İki kokteyl</div>
-              <div class="alt">Sota kokteyl listesinden seçiyorsunuz</div>
+              <div class="alt">Listemizden seçiyorsunuz</div>
             </div>
             <div class="kalem"><div class="ad">Meyve tabağı</div></div>
             <div class="kalem"><div class="ad">Çerez</div></div>
           </div>
-          <p class="kutu-not">Partiye katılıp hafif bir sofrada kalmak isteyenler için.</p>
+          <p class="kutu-not">Hafif bir sofra tercih edenler için.</p>
         </div>
 
       </div>
-      <button type="button" class="etk-dugme" data-gun="gece">31 Ekim için yer ayır</button>
+      <button type="button" class="etk-dugme" data-gun="gece">31 Ekim · yer ayır</button>
     </div>
   </section>
 
@@ -464,20 +479,20 @@ textarea{resize:vertical;min-height:70px}
         <span>Açık büfe</span>
         <span>Çocuk etkinliği</span>
       </div>
-      <p class="etk-aciklama">Cadılar Bayramı temalı açık büfe kahvaltı ve ardından çocuklar için oyun saati. Ayrı menü yok, büfe gün boyu açık.</p>
+      <p class="etk-aciklama">Uzun bir pazar sabahı, ardından çocuklara ayrılmış saatler.</p>
     </div>
     <div class="ic">
       <ul class="program">
         <li>
           <span class="vakit">09:00 – 13:00</span>
           <span class="ne">Açık büfe brunch
-            <small>Cadılar Bayramı temalı; içecekler, sıcak yemekler, börekler ve klasik serpme kahvaltı</small>
+            <small>Sıcak yemekler, börekler ve klasik serpme kahvaltı</small>
           </span>
         </li>
         <li>
           <span class="vakit">13:00 – 15:00</span>
           <span class="ne">Oyun ablası ile etkinlik
-            <small>Minik misafirler için oyunlar ve Halloween temalı özel tabaklar</small>
+            <small>Oyunlar ve minikler için özel tabaklar</small>
           </span>
         </li>
       </ul>
@@ -486,8 +501,8 @@ textarea{resize:vertical;min-height:70px}
         <div><span>İlave yetişkin</span><span>2.000 TL</span></div>
         <div><span>İlave çocuk</span><span>1.500 TL</span></div>
       </div>
-      <p class="kutu-not">Kahvaltı ve etkinlik fiyata dahildir.</p>
-      <button type="button" class="etk-dugme" data-gun="brunch">1 Kasım için yer ayır</button>
+      <p class="kutu-not">Kahvaltı ve etkinlik dahil.</p>
+      <button type="button" class="etk-dugme" data-gun="brunch">1 Kasım · yer ayır</button>
     </div>
   </section>
 
@@ -508,13 +523,13 @@ textarea{resize:vertical;min-height:70px}
             <span class="alt2">Brunch &amp; etkinlik · 09:00</span>
           </button>
         </div>
-        <p class="not" style="text-align:left;margin-top:2px">İkisine birden katılacaksanız her ikisini de seçebilirsiniz.</p>
+        <p class="not" style="text-align:left;margin-top:2px">İkisini birden seçebilirsiniz.</p>
       </div>
 
       <div class="alan" id="saatGeceAlan">
-        <label for="saatGece">31 Ekim · geliş saati</label>
+        <label for="saatGece">31 Ekim · saat</label>
         <div class="saatler" id="saatGece" role="group" aria-label="Gece partisi saati"></div>
-        <p class="dolu-not" id="doluNot" hidden>31 Ekim için masalarımız doldu. Yine de yer açılabiliyor — <a href="tel:+905333679951">0533 367 99 51</a>.</p>
+        <p class="dolu-not" id="doluNot" hidden>31 Ekim doldu. Yine de yer açılabiliyor — <a href="tel:+905333679951">0533 367 99 51</a>.</p>
       </div>
 
       <div class="alan" id="tipAlan">
@@ -532,8 +547,23 @@ textarea{resize:vertical;min-height:70px}
       </div>
 
       <div class="alan" id="saatBrunchAlan" hidden>
-        <label for="saatBrunch">1 Kasım · geliş saati</label>
+        <label for="saatBrunch">1 Kasım · saat</label>
         <div class="saatler" id="saatBrunch" role="group" aria-label="Brunch saati"></div>
+      </div>
+
+      <div class="alan" id="mekanAlan">
+        <label for="mekanSec">Nerede oturalım</label>
+        <div class="tip-sec uclu" id="mekanSec" role="group" aria-label="Mekân seçimi">
+          <button type="button" class="tip-dugme" data-alan="bahce" aria-pressed="false">
+            <span class="ad2">Bahçe</span>
+          </button>
+          <button type="button" class="tip-dugme" data-alan="ic" aria-pressed="false">
+            <span class="ad2">İç mekân</span>
+          </button>
+          <button type="button" class="tip-dugme" data-alan="fark-etmez" aria-pressed="true">
+            <span class="ad2">Fark etmez</span>
+          </button>
+        </div>
       </div>
 
       <div class="satir">
@@ -564,19 +594,19 @@ textarea{resize:vertical;min-height:70px}
       </div>
 
       <div class="alan">
-        <label for="notu">Eklemek istediğiniz bir şey var mı</label>
-        <textarea id="notu" name="notu" placeholder="Alerji, özel gün, masa tercihi…"></textarea>
+        <label for="notu">Eklemek istedikleriniz</label>
+        <textarea id="notu" name="notu" placeholder="Alerji, özel gün, dilekleriniz…"></textarea>
       </div>
 
       <p class="hata" id="hata" role="alert"></p>
-      <button type="submit" class="gonder" id="gonder">Masamı ayır</button>
-      <p class="not">Masanız anında ayrılır — teyit için aranmayı beklemenize gerek yok.</p>
+      <button type="submit" class="gonder" id="gonder">Yerimi ayır</button>
+      <p class="not">Yeriniz anında ayrılır, ayrıca teyit gerekmez.</p>
     </form>
 
     <div class="onay" id="onay">
       <div class="kabak" aria-hidden="true">🎃</div>
-      <h3>Masanız ayrıldı</h3>
-      <p>Rezervasyonunuz oluşturuldu, ayrıca teyit gerekmiyor. Sizi aramızda görmek için sabırsızlanıyoruz.</p>
+      <h3>Yeriniz ayrıldı</h3>
+      <p>Sizi aramızda görmeyi bekliyoruz.</p>
       <div class="ozet" id="ozet"></div>
       <p class="kod" id="rezKod"></p>
       <p class="eksik-not" id="eksikNot" hidden></p>
@@ -589,8 +619,7 @@ textarea{resize:vertical;min-height:70px}
       Alaçatı, 11039. Sokak No:18, Çeşme / İzmir<br>
       Rezervasyon <a href="tel:+905333679951">0533 367 99 51</a>
     </p>
-    <p class="michelin">Viento Alaçatı MICHELIN Guide otel seçkisinde ·
-       Sota Alaçatı MICHELIN Guide Türkiye'de 2024, 2025 ve 2026 seçkisinde</p>
+    <p class="michelin">MICHELIN Hotel Selection · Sota Alaçatı, MICHELIN Guide</p>
   </footer>
 </div>
 
@@ -707,6 +736,7 @@ textarea{resize:vertical;min-height:70px}
   var secili = { gece: true, brunch: false };
   var seciliSaat = { gece: '19:30', brunch: '09:00' };
   var menuTipi = 'yemekli';
+  var seciliAlan = 'fark-etmez';
 
   function tl(n){ return n.toLocaleString('tr-TR') + ' TL'; }
 
@@ -800,6 +830,16 @@ textarea{resize:vertical;min-height:70px}
   });
   E('cocuk').addEventListener('change', hesapla);
 
+  document.querySelectorAll('#mekanSec .tip-dugme').forEach(function(d){
+    d.addEventListener('click', function(){
+      document.querySelectorAll('#mekanSec .tip-dugme').forEach(function(x){
+        x.setAttribute('aria-pressed','false');
+      });
+      d.setAttribute('aria-pressed','true');
+      seciliAlan = d.getAttribute('data-alan');
+    });
+  });
+
   /* Etkinlik bloklarındaki düğmeler: o günü seçip forma götürür */
   document.querySelectorAll('.etk-dugme').forEach(function(d){
     d.addEventListener('click', function(){
@@ -868,7 +908,7 @@ textarea{resize:vertical;min-height:70px}
     return fetch(API + '/api/masa/request', {
       method: 'POST', headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
-        hotel:'sota-alacati', day:e.gun, time:seciliSaat[hangi], guests:k,
+        hotel:'sota-alacati', day:e.gun, time:seciliSaat[hangi], guests:k, area:seciliAlan,
         name:ad, phone:tel, occasion:vesile, note:notlar.join(' · '), channel:'halloween'
       })
     }).then(function(y){ return y.json(); });
@@ -888,7 +928,7 @@ textarea{resize:vertical;min-height:70px}
       h.textContent = 'Telefon numarası eksik görünüyor.'; E('tel').focus(); return;
     }
     h.textContent = '';
-    dugme.disabled = true; dugme.textContent = 'Masanız ayrılıyor…';
+    dugme.disabled = true; dugme.textContent = 'Ayrılıyor…';
 
     var sira = [];
     if (secili.gece) sira.push('gece');
@@ -910,9 +950,9 @@ textarea{resize:vertical;min-height:70px}
       if (!basarili.length){
         var ilk = sonuc[0] && sonuc[0].veri;
         h.textContent = (ilk && ilk.error === 'masa_yok')
-          ? 'Bu saatte boş masamız kalmadı. Başka bir saat seçebilir ya da 0533 367 99 51’den bize ulaşabilirsiniz.'
+          ? 'Bu saat doldu. Başka bir saat seçebilir ya da 0533 367 99 51’den bize ulaşabilirsiniz.'
           : 'Rezervasyon alınamadı, lütfen tekrar deneyin.';
-        dugme.disabled = false; dugme.textContent = 'Masamı ayır';
+        dugme.disabled = false; dugme.textContent = 'Yerimi ayır';
         musaitlikCek();
         return;
       }
