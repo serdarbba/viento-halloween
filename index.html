@@ -1,0 +1,799 @@
+<title>Viento Halloween</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Karla:ital,wght@0,300;0,400;0,600;1,400&family=Pinyon+Script&display=swap">
+<style>
+:root{
+  --gece:#0D0A0F;
+  --duman:#1A151E;
+  --duman2:#241C29;
+  --alev:#FF7A1A;
+  --alev-sicak:#FFB056;
+  --bordo:#7B1E2B;
+  --kemik:#F2E8DA;
+  --sis:#9A8FA6;
+  --cizgi:rgba(242,232,218,.14);
+  --govde:'Karla',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --baslik:'Cinzel',Georgia,serif;
+  --yazi:'Pinyon Script',cursive;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--gece);
+  color:var(--kemik);
+  font-family:var(--govde);
+  font-weight:300;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.sayfa{max-width:860px;margin:0 auto;padding-inline:20px;padding-block:0 64px;position:relative}
+
+/* ışık havuzu */
+.isik{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(760px 520px at 50% 6%, rgba(255,122,26,.16), transparent 68%),
+    radial-gradient(520px 420px at 12% 52%, rgba(123,30,43,.20), transparent 70%),
+    radial-gradient(480px 400px at 90% 76%, rgba(123,30,43,.14), transparent 72%);
+  animation:nefes 11s ease-in-out infinite;
+}
+@keyframes nefes{0%,100%{opacity:.82}50%{opacity:1}}
+
+/* ---------- atmosfer ---------- */
+#atmosfer{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.ay{
+  position:absolute;top:18px;left:50%;transform:translateX(-50%);
+  width:min(300px,62vw);aspect-ratio:1;border-radius:50%;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(circle at 38% 34%, rgba(255,241,214,.10) 0 8%, transparent 9%),
+    radial-gradient(circle at 62% 58%, rgba(255,241,214,.08) 0 6%, transparent 7%),
+    radial-gradient(circle at 46% 70%, rgba(255,241,214,.07) 0 5%, transparent 6%),
+    radial-gradient(circle at 50% 50%, rgba(255,232,196,.17) 0 56%, rgba(255,190,120,.07) 72%, transparent 78%);
+  box-shadow:0 0 120px 36px rgba(255,176,86,.11);
+  animation:ayNefes 14s ease-in-out infinite;
+}
+@keyframes ayNefes{0%,100%{opacity:.88}50%{opacity:1}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;z-index:1;text-align:center;padding-block:116px 40px}
+.eyebrow{
+  font-family:var(--govde);font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--sis);margin:0 0 18px;
+}
+.hero h1{
+  font-family:var(--baslik);font-weight:700;
+  font-size:clamp(2.7rem,11vw,5.1rem);
+  line-height:.95;letter-spacing:.06em;margin:0;
+  text-wrap:balance;
+  background:linear-gradient(180deg,var(--kemik) 26%,var(--alev-sicak) 118%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:yuksel .9s cubic-bezier(.2,.7,.3,1) backwards,
+            parilti 5.5s 1s ease-in-out infinite;
+}
+@keyframes parilti{
+  0%,100%{filter:drop-shadow(0 0 20px rgba(255,122,26,.30))}
+  6%{filter:drop-shadow(0 0 7px rgba(255,122,26,.12))}
+  9%{filter:drop-shadow(0 0 30px rgba(255,122,26,.46))}
+  14%{filter:drop-shadow(0 0 11px rgba(255,122,26,.17))}
+  19%{filter:drop-shadow(0 0 26px rgba(255,122,26,.38))}
+  55%{filter:drop-shadow(0 0 16px rgba(255,122,26,.26))}
+  62%{filter:drop-shadow(0 0 32px rgba(255,122,26,.44))}
+}
+.hero .script{
+  font-family:var(--yazi);font-size:clamp(1.9rem,6.4vw,3rem);
+  color:var(--alev);margin:-4px 0 0;line-height:1.1;
+  text-shadow:0 0 26px rgba(255,122,26,.42);
+  animation:yuksel .9s .12s cubic-bezier(.2,.7,.3,1) backwards;
+}
+@keyframes yuksel{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero .tarih{
+  margin:22px 0 0;font-size:1.02rem;color:var(--kemik);letter-spacing:.04em;
+}
+.hero .yer{margin:6px 0 0;color:var(--sis);font-size:.93rem}
+.hero .yer b{color:var(--kemik);font-weight:600}
+
+/* ---------- etkinlik seçimi ---------- */
+.bolum{position:relative;z-index:1;margin-top:54px}
+.bolum-bas{
+  font-family:var(--baslik);font-size:.82rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--sis);margin:0 0 16px;display:flex;align-items:center;gap:14px;font-weight:600;
+}
+.bolum-bas::after{content:"";flex:1;height:1px;background:var(--cizgi)}
+
+.secim{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:14px}
+.kart{
+  position:relative;text-align:left;cursor:pointer;
+  background:linear-gradient(165deg,var(--duman2),var(--duman));
+  border:1px solid var(--cizgi);border-radius:4px;
+  padding:22px 20px 20px;color:inherit;font:inherit;
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.kart:hover{transform:translateY(-3px);border-color:rgba(255,122,26,.42);box-shadow:0 14px 34px rgba(0,0,0,.5)}
+.kart:focus-visible{outline:2px solid var(--alev);outline-offset:3px}
+.kart[aria-pressed="true"]{
+  border-color:var(--alev);
+  animation:kartNabiz 3.6s ease-in-out infinite;
+}
+@keyframes kartNabiz{
+  0%,100%{box-shadow:0 0 0 1px var(--alev),0 16px 38px rgba(255,122,26,.15)}
+  50%{box-shadow:0 0 0 1px var(--alev),0 16px 46px rgba(255,122,26,.30)}
+}
+.detay{animation:acil .45s cubic-bezier(.2,.7,.3,1) backwards}
+@keyframes acil{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.kart .gun{font-family:var(--baslik);font-size:1.22rem;font-weight:600;letter-spacing:.03em;margin:0}
+.kart .saat{color:var(--alev);font-size:.86rem;letter-spacing:.12em;text-transform:uppercase;margin:7px 0 0}
+.kart .aciklama{color:var(--sis);font-size:.92rem;margin:12px 0 0}
+.kart .etiketler{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.etiket{
+  font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;
+  border:1px solid var(--cizgi);border-radius:2px;padding:4px 8px;color:var(--sis);
+}
+.kart[aria-pressed="true"] .etiket{border-color:rgba(255,122,26,.34);color:var(--alev-sicak)}
+.secili-isaret{
+  position:absolute;top:14px;right:14px;width:9px;height:9px;border-radius:50%;
+  background:var(--alev);opacity:0;transition:opacity .2s;
+  box-shadow:0 0 12px var(--alev);
+}
+.kart[aria-pressed="true"] .secili-isaret{opacity:1}
+
+/* ---------- menü ---------- */
+.detay{
+  margin-top:16px;border:1px solid var(--cizgi);border-radius:4px;
+  background:linear-gradient(170deg,rgba(36,28,41,.82),rgba(26,21,30,.82));
+  padding:26px 22px;
+}
+.menu-bas{
+  font-family:var(--baslik);text-align:center;font-size:1.05rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:0 0 20px;font-weight:600;
+}
+.kurs{margin:0 0 20px}
+.kurs:last-child{margin-bottom:0}
+.kurs h4{
+  font-family:var(--yazi);font-size:1.5rem;color:var(--alev);
+  text-align:center;margin:0 0 8px;font-weight:400;line-height:1;
+}
+.kalem{text-align:center;margin:0 0 11px}
+.kalem:last-child{margin-bottom:0}
+.kalem .ad{font-size:.97rem;letter-spacing:.04em;color:var(--kemik)}
+.kalem .alt{font-size:.85rem;color:var(--sis);margin-top:2px;line-height:1.5}
+.ayrac{
+  text-align:center;color:var(--sis);font-size:.78rem;letter-spacing:.2em;
+  text-transform:uppercase;margin:10px 0;
+}
+.program{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.program li{display:flex;gap:16px;align-items:baseline}
+.program .vakit{
+  font-family:var(--baslik);color:var(--alev);font-size:.95rem;font-weight:600;
+  min-width:72px;font-variant-numeric:tabular-nums;letter-spacing:.04em;
+}
+.program .ne{color:var(--kemik);font-size:.96rem}
+.program .ne small{display:block;color:var(--sis);font-size:.85rem}
+
+/* ---------- form ---------- */
+.form-alan{display:grid;gap:16px;margin-top:16px}
+.satir{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.alan{display:flex;flex-direction:column;gap:7px}
+label{font-size:.74rem;letter-spacing:.17em;text-transform:uppercase;color:var(--sis)}
+input,select,textarea{
+  font-family:var(--govde);font-size:1rem;color:var(--kemik);
+  background:rgba(13,10,15,.72);border:1px solid var(--cizgi);border-radius:3px;
+  padding:12px 13px;width:100%;transition:border-color .18s;
+}
+input::placeholder,textarea::placeholder{color:rgba(154,143,166,.6)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--alev)}
+select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--sis) 50%),linear-gradient(135deg,var(--sis) 50%,transparent 50%);background-position:calc(100% - 19px) 50%,calc(100% - 14px) 50%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:38px}
+select option{background:var(--duman);color:var(--kemik)}
+textarea{resize:vertical;min-height:72px}
+.saatler{display:flex;flex-wrap:wrap;gap:9px}
+.saat-dugme{
+  font-family:var(--govde);font-size:.95rem;color:var(--kemik);cursor:pointer;
+  background:rgba(13,10,15,.72);border:1px solid var(--cizgi);border-radius:3px;
+  padding:10px 17px;font-variant-numeric:tabular-nums;letter-spacing:.05em;
+  transition:border-color .18s,background .18s,color .18s;
+}
+.saat-dugme:hover{border-color:rgba(255,122,26,.45)}
+.saat-dugme:focus-visible{outline:2px solid var(--alev);outline-offset:2px}
+.saat-dugme[aria-pressed="true"]{background:var(--alev);border-color:var(--alev);color:#1A0E04;font-weight:600}
+.gonder{
+  position:relative;overflow:hidden;
+  font-family:var(--baslik);font-size:1rem;font-weight:600;letter-spacing:.16em;
+  text-transform:uppercase;cursor:pointer;
+  background:linear-gradient(180deg,var(--alev-sicak),var(--alev));
+  color:#24120A;border:none;border-radius:3px;padding:17px 24px;width:100%;
+  transition:transform .18s,box-shadow .18s,filter .18s;
+  box-shadow:0 10px 30px rgba(255,122,26,.24);
+}
+.gonder::after{
+  content:"";position:absolute;top:0;bottom:0;width:38%;left:-45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.42),transparent);
+  animation:kaydir 4.2s ease-in-out infinite;
+}
+@keyframes kaydir{0%{left:-45%}55%,100%{left:118%}}
+.gonder:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(255,122,26,.34);filter:brightness(1.05)}
+.gonder:focus-visible{outline:2px solid var(--kemik);outline-offset:3px}
+.gonder:disabled{opacity:.55;cursor:default;transform:none}
+.not{color:var(--sis);font-size:.86rem;margin:0;text-align:center}
+.hata{color:#FF9A8A;font-size:.9rem;min-height:1.2em;margin:0;text-align:center}
+
+/* ---------- onay ---------- */
+.onay{display:none;text-align:center;padding:48px 22px}
+.onay.acik{display:block}
+.onay .kabak{font-size:3rem;line-height:1;margin-bottom:14px;animation:zipla .7s cubic-bezier(.2,.8,.3,1) backwards}
+@keyframes zipla{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+.onay h3{font-family:var(--baslik);font-size:1.5rem;letter-spacing:.06em;margin:0 0 10px;font-weight:600}
+.onay p{color:var(--sis);margin:0 auto;max-width:42ch}
+.onay .ozet{
+  margin:22px auto 0;max-width:340px;border:1px solid var(--cizgi);border-radius:4px;
+  padding:16px 18px;text-align:left;display:grid;gap:9px;
+}
+.onay .ozet div{display:flex;justify-content:space-between;gap:16px;font-size:.93rem}
+.onay .ozet span:first-child{color:var(--sis);letter-spacing:.06em}
+.onay .ozet span:last-child{color:var(--kemik);font-variant-numeric:tabular-nums}
+
+/* ---------- alt ---------- */
+.alt{
+  position:relative;z-index:1;margin-top:60px;padding-top:26px;
+  border-top:1px solid var(--cizgi);text-align:center;color:var(--sis);font-size:.89rem;
+}
+.alt .marka{font-family:var(--baslik);color:var(--kemik);letter-spacing:.2em;font-size:.95rem;text-transform:uppercase}
+.alt a{color:var(--alev);text-decoration:none;border-bottom:1px solid rgba(255,122,26,.3)}
+.alt a:hover{border-bottom-color:var(--alev)}
+.alt .michelin{margin-top:12px;font-size:.84rem;font-style:italic}
+
+.saat-dugme.dolu{
+  opacity:.4;cursor:not-allowed;text-decoration:line-through;
+  border-color:var(--cizgi);color:var(--sis);
+}
+.saat-dugme.dolu:hover{border-color:var(--cizgi)}
+.dolu-not{
+  margin:4px 0 0;font-size:.87rem;color:var(--sis);
+}
+.dolu-not a{color:var(--alev);text-decoration:none;border-bottom:1px solid rgba(255,122,26,.3)}
+.eksik-not{
+  margin:16px auto 0;max-width:40ch;font-size:.88rem;color:var(--alev-sicak);
+  border:1px solid rgba(255,122,26,.3);border-radius:3px;padding:11px 14px;
+}
+
+.secim-ipucu{color:var(--sis);font-size:.87rem;margin:0 0 14px}
+.onay .kod{
+  margin:18px 0 0;font-size:.86rem;color:var(--sis);letter-spacing:.1em;
+}
+.onay .kod b{
+  color:var(--alev);font-family:var(--baslik);letter-spacing:.14em;
+  font-variant-numeric:tabular-nums;
+}
+
+@media (max-width:520px){
+  .satir{grid-template-columns:1fr}
+  .hero{padding-block:52px 32px}
+  .mumlar{gap:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<div class="isik" aria-hidden="true"></div>
+<canvas id="atmosfer" aria-hidden="true"></canvas>
+
+<div class="sayfa">
+
+  <header class="hero">
+    <div class="ay" aria-hidden="true"></div>
+    <p class="eyebrow">Viento Alaçatı</p>
+    <h1>HALLOWEEN</h1>
+    <p class="script">Night Party</p>
+    <p class="tarih">31 Ekim Cumartesi &middot; 1 Kasım Pazar</p>
+    <p class="yer">Alaçatı'nın kalbinde, <b>Sota</b> mutfağından bir gece ve bir gün</p>
+  </header>
+
+  <section class="bolum" id="secimBolumu">
+    <h2 class="bolum-bas">Programı seçin</h2>
+    <p class="secim-ipucu">İkisine birden katılabilirsiniz — geceyi seçip ertesi sabah brunch'a kalanlar için hafta sonu tek bir rezervasyonda toplanıyor.</p>
+    <div class="secim">
+      <button type="button" class="kart" id="kartGece" aria-pressed="true" data-gun="2026-10-31">
+        <span class="secili-isaret" aria-hidden="true"></span>
+        <p class="gun">31 Ekim · Cumartesi</p>
+        <p class="saat">Gece 19:30</p>
+        <p class="aciklama">DJ eşliğinde "Oldies but Goldies" partisi ve mum ışığında dört kurs menü.</p>
+        <div class="etiketler">
+          <span class="etiket">Canlı müzik</span>
+          <span class="etiket">Kostüm</span>
+          <span class="etiket">Set menü</span>
+        </div>
+      </button>
+      <button type="button" class="kart" id="kartBrunch" aria-pressed="false" data-gun="2026-11-01">
+        <span class="secili-isaret" aria-hidden="true"></span>
+        <p class="gun">1 Kasım · Pazar</p>
+        <p class="saat">Brunch 09:30</p>
+        <p class="aciklama">Bahçede uzun bir brunch sofrası, ardından minik misafirler için oyun saati.</p>
+        <div class="etiketler">
+          <span class="etiket">Aile</span>
+          <span class="etiket">Çocuk etkinliği</span>
+          <span class="etiket">Bahçe</span>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <section class="bolum" id="menuBolumu">
+    <h2 class="bolum-bas" id="detayBaslik">Gecenin menüsü</h2>
+
+    <div class="detay" id="detayGece">
+      <p class="menu-bas">Set Menü</p>
+      <div class="kurs">
+        <h4>Soğuk</h4>
+        <div class="kalem">
+          <div class="ad">İstiridye Mantarlı Humus</div>
+          <div class="alt">Ayvalık sızma zeytinyağı, çıtır nohut ve acı yağ</div>
+        </div>
+        <div class="kalem">
+          <div class="ad">Marine Çeşme Sardalyesi</div>
+          <div class="alt">Çeşme limonunda marine edilmiş Çeşme sardalyesi</div>
+        </div>
+      </div>
+      <div class="kurs">
+        <h4>Salata</h4>
+        <div class="kalem">
+          <div class="ad">Mevsim Bahçe Yeşillikleri Salatası</div>
+        </div>
+      </div>
+      <div class="kurs">
+        <h4>Ana Yemek</h4>
+        <div class="kalem">
+          <div class="ad">Limonlu Tavuk</div>
+          <div class="alt">Tavuk suyu, limon vinegret, ızgara taze kabak, taze nane, yeşil soğan, dereotu, yeşil yağ</div>
+        </div>
+        <p class="ayrac">ya da</p>
+        <div class="kalem">
+          <div class="ad">Ovacık Enginarlı Karaburun Levreği</div>
+          <div class="alt">Enginar ve levreğin uyumu, Çeşme limonlu Ayvalık sızma zeytinyağı</div>
+        </div>
+      </div>
+      <div class="kurs">
+        <h4>Tatlı</h4>
+        <div class="kalem">
+          <div class="ad">Antep Fıstıklı ve Kaymaklı Katmer</div>
+          <div class="alt">Vanilyalı dondurma ile</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="detay" id="detayBrunch" hidden>
+      <p class="menu-bas">Gün Akışı</p>
+      <ul class="program">
+        <li>
+          <span class="vakit">09:30</span>
+          <span class="ne">Brunch sofrası açılıyor
+            <small>Bahçede, zeytin ağaçlarının altında</small>
+          </span>
+        </li>
+        <li>
+          <span class="vakit">13:00</span>
+          <span class="ne">Oyun ablası ile Halloween etkinlikleri
+            <small>Minik misafirler için kostüm, oyun ve sürprizler</small>
+          </span>
+        </li>
+        <li>
+          <span class="vakit">Gün boyu</span>
+          <span class="ne">Sota mutfağından sıcak ve soğuk ikramlar</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="bolum" id="formBolumu">
+    <h2 class="bolum-bas">Yerinizi ayıralım</h2>
+
+    <form class="form-alan" id="rezForm" novalidate>
+      <div class="alan" id="saatGeceAlan">
+        <label for="saatGece">31 Ekim · gece partisi saati</label>
+        <div class="saatler" id="saatGece" role="group" aria-label="Gece partisi saati"></div>
+        <p class="dolu-not" id="doluNot" hidden>31 Ekim için masalarımız doldu. Yine de yer açılabiliyor — <a href="tel:+905333679951">0533 367 99 51</a>.</p>
+      </div>
+
+      <div class="alan" id="saatBrunchAlan" hidden>
+        <label for="saatBrunch">1 Kasım · brunch saati</label>
+        <div class="saatler" id="saatBrunch" role="group" aria-label="Brunch saati"></div>
+      </div>
+
+      <div class="satir">
+        <div class="alan">
+          <label for="kisi">Kaç kişi</label>
+          <select id="kisi" name="kisi"></select>
+        </div>
+        <div class="alan">
+          <label for="tel">Telefon</label>
+          <input id="tel" name="tel" type="tel" inputmode="tel" placeholder="05xx xxx xx xx" autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="alan">
+        <label for="ad">Ad soyad</label>
+        <input id="ad" name="ad" type="text" placeholder="Adınız ve soyadınız" autocomplete="name">
+      </div>
+
+      <div class="alan">
+        <label for="notu">Eklemek istediğiniz bir şey var mı</label>
+        <textarea id="notu" name="notu" placeholder="Alerji, özel gün, masa tercihi…"></textarea>
+      </div>
+
+      <p class="hata" id="hata" role="alert"></p>
+      <button type="submit" class="gonder" id="gonder">Masamı ayır</button>
+      <p class="not">Masanız anında ayrılır — teyit için aranmayı beklemenize gerek yok.</p>
+    </form>
+
+    <div class="onay" id="onay">
+      <div class="kabak" aria-hidden="true">🎃</div>
+      <h3>Masanız ayrıldı</h3>
+      <p>Rezervasyonunuz oluşturuldu, ayrıca teyit gerekmiyor. Sizi aramızda görmek için sabırsızlanıyoruz.</p>
+      <div class="ozet" id="ozet"></div>
+      <p class="kod" id="rezKod"></p>
+      <p class="eksik-not" id="eksikNot" hidden></p>
+    </div>
+  </section>
+
+  <footer class="alt">
+    <p class="marka">Viento Alaçatı</p>
+    <p>
+      Alaçatı, 11039. Sokak No:18, Çeşme / İzmir<br>
+      Rezervasyon <a href="tel:+905333679951">0533 367 99 51</a>
+    </p>
+    <p class="michelin">Mutfağımız Sota Alaçatı — MICHELIN Guide Türkiye seçkisinde 2024, 2025 ve 2026</p>
+  </footer>
+</div>
+
+<script>
+/* Atmosfer: yükselen közler ve süzülen yarasalar */
+(function(){
+  var tuval = document.getElementById('atmosfer');
+  if (!tuval || !tuval.getContext) return;
+  var ctx = tuval.getContext('2d');
+  var sakin = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var kozler, yarasalar, W, H, dpr;
+
+  function rast(a,b){ return a + Math.random()*(b-a); }
+
+  function olcule(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth; H = window.innerHeight;
+    tuval.width = Math.round(W*dpr); tuval.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+
+  function kozYap(ilk){
+    return {
+      x: rast(0,W),
+      y: ilk ? rast(0,H) : H + rast(8,90),
+      r: rast(.8,2.3),
+      hiz: rast(.16,.58),
+      sal: rast(.3,1),
+      faz: rast(0,Math.PI*2),
+      alfa: rast(.2,.7)
+    };
+  }
+
+  function yarasaYap(){
+    var yon = Math.random() < .5 ? 1 : -1;
+    var b = {
+      x: yon > 0 ? rast(-200,-40) : W + rast(40,200),
+      y: rast(H*.06,H*.46),
+      hiz: yon * rast(.3,.7),
+      s: rast(.7,1.45),
+      faz: rast(0,Math.PI*2),
+      dalga: rast(.004,.011),
+      genlik: rast(12,34)
+    };
+    b.y0 = b.y;
+    return b;
+  }
+
+  function kur(){
+    olcule();
+    var adet = Math.round(Math.min(44, Math.max(14, W/26)));
+    kozler = [];
+    for (var i=0;i<adet;i++) kozler.push(kozYap(true));
+    yarasalar = [];
+    var ya = W < 620 ? 2 : 4;
+    for (var j=0;j<ya;j++) yarasalar.push(yarasaYap());
+  }
+
+  function yarasaCiz(b,t){
+    var kanat = Math.sin(t*.009 + b.faz)*.5 + .5;
+    var ac = .3 + kanat*1.1;
+    ctx.save();
+    ctx.translate(b.x, b.y);
+    ctx.scale(b.hiz < 0 ? -b.s : b.s, b.s);
+    ctx.fillStyle = 'rgba(9,5,12,.84)';
+    ctx.beginPath();
+    ctx.moveTo(0,0);
+    ctx.quadraticCurveTo(-7,-7*ac,-16,-2*ac);
+    ctx.quadraticCurveTo(-10,1.6,-5.5,1.2);
+    ctx.quadraticCurveTo(-2.5,4.6,0,2.2);
+    ctx.quadraticCurveTo(2.5,4.6,5.5,1.2);
+    ctx.quadraticCurveTo(10,1.6,16,-2*ac);
+    ctx.quadraticCurveTo(7,-7*ac,0,0);
+    ctx.closePath();
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function ciz(t){
+    ctx.clearRect(0,0,W,H);
+
+    for (var i=0;i<kozler.length;i++){
+      var k = kozler[i];
+      if (!sakin){ k.y -= k.hiz; k.faz += .013; }
+      if (k.y < -14){ kozler[i] = kozYap(false); continue; }
+      var x = k.x + Math.sin(k.faz)*k.sal*9;
+      var a = k.alfa * Math.max(0, Math.min(1, (k.y/H)*1.5));
+      var yp = k.r*4.5;
+      var gr = ctx.createRadialGradient(x,k.y,0,x,k.y,yp);
+      gr.addColorStop(0,'rgba(255,214,150,'+a+')');
+      gr.addColorStop(.42,'rgba(255,122,26,'+(a*.55)+')');
+      gr.addColorStop(1,'rgba(255,122,26,0)');
+      ctx.fillStyle = gr;
+      ctx.beginPath(); ctx.arc(x,k.y,yp,0,Math.PI*2); ctx.fill();
+    }
+
+    for (var j=0;j<yarasalar.length;j++){
+      var b = yarasalar[j];
+      if (!sakin){
+        b.x += b.hiz;
+        b.y = b.y0 + Math.sin(b.x*b.dalga + b.faz)*b.genlik;
+      }
+      yarasaCiz(b, sakin ? 0 : t);
+      if ((b.hiz > 0 && b.x > W+220) || (b.hiz < 0 && b.x < -220)) yarasalar[j] = yarasaYap();
+    }
+
+    if (!sakin) requestAnimationFrame(ciz);
+  }
+
+  kur();
+  ciz(0);
+
+  var zaman;
+  window.addEventListener('resize', function(){
+    clearTimeout(zaman);
+    zaman = setTimeout(function(){ kur(); if (sakin) ciz(0); }, 180);
+  });
+})();
+
+(function(){
+  var E = function(id){ return document.getElementById(id); };
+
+  var API = 'https://alya-konsiyerj.up.railway.app';
+
+  var ETKINLIK = {
+    gece: {
+      gun: '2026-10-31',
+      baslik: 'Gecenin menüsü',
+      saatler: ['19:30','20:00','20:30'],
+      etiket: '31 Ekim Cumartesi',
+      vesile: 'Halloween Night Party',
+      musaitlikVar: true
+    },
+    brunch: {
+      gun: '2026-11-01',
+      baslik: 'Gün akışı',
+      saatler: ['09:30','10:30','11:30'],
+      etiket: '1 Kasım Pazar',
+      vesile: 'Halloween Brunch',
+      musaitlikVar: false
+    }
+  };
+
+  var secili = { gece: true, brunch: false };
+  var seciliSaat = { gece: '19:30', brunch: '09:30' };
+
+  // kişi sayısı
+  var kisi = E('kisi');
+  var secenekler = [1,2,3,4,5,6,7,8,9,10,11,12,14,16,18,20];
+  secenekler.forEach(function(n){
+    var o = document.createElement('option');
+    o.value = String(n);
+    o.textContent = n + ' kişi';
+    if (n === 2) o.selected = true;
+    kisi.appendChild(o);
+  });
+
+  function saatleriCiz(hangi, kutuId){
+    var kutu = E(kutuId);
+    kutu.innerHTML = '';
+    ETKINLIK[hangi].saatler.forEach(function(s){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'saat-dugme';
+      b.textContent = s;
+      b.setAttribute('aria-pressed', s === seciliSaat[hangi] ? 'true' : 'false');
+      b.addEventListener('click', function(){
+        kutu.querySelectorAll('.saat-dugme').forEach(function(x){
+          x.setAttribute('aria-pressed','false');
+        });
+        b.setAttribute('aria-pressed','true');
+        seciliSaat[hangi] = s;
+      });
+      kutu.appendChild(b);
+    });
+  }
+
+  function tazele(){
+    E('kartGece').setAttribute('aria-pressed', secili.gece ? 'true' : 'false');
+    E('kartBrunch').setAttribute('aria-pressed', secili.brunch ? 'true' : 'false');
+
+    E('detayGece').hidden = !secili.gece;
+    E('detayBrunch').hidden = !secili.brunch;
+    E('detayBaslik').textContent =
+      (secili.gece && secili.brunch) ? 'Hafta sonu programı'
+      : secili.gece ? ETKINLIK.gece.baslik
+      : ETKINLIK.brunch.baslik;
+
+    E('saatGeceAlan').hidden = !secili.gece;
+    E('saatBrunchAlan').hidden = !secili.brunch;
+  }
+
+  function degistir(hangi){
+    // en az bir program seçili kalsın
+    var digeri = (hangi === 'gece') ? 'brunch' : 'gece';
+    if (secili[hangi] && !secili[digeri]) return;
+    secili[hangi] = !secili[hangi];
+    tazele();
+  }
+
+  E('kartGece').addEventListener('click', function(){ degistir('gece'); });
+  E('kartBrunch').addEventListener('click', function(){ degistir('brunch'); });
+
+  /* Gerçek doluluk: gece için canlı müsaitlik sorgulanır, dolu saat kapatılır. */
+  function musaitlikUygula(acikSaatler){
+    var kutu = E('saatGece');
+    var dugmeler = kutu.querySelectorAll('.saat-dugme');
+    var ilkAcik = null;
+    dugmeler.forEach(function(b){
+      var s = b.textContent.trim();
+      var acik = acikSaatler.indexOf(s) !== -1;
+      b.disabled = !acik;
+      b.classList.toggle('dolu', !acik);
+      b.title = acik ? '' : 'Bu saat doldu';
+      if (acik && !ilkAcik) ilkAcik = s;
+      if (!acik && b.getAttribute('aria-pressed') === 'true') b.setAttribute('aria-pressed','false');
+    });
+    var halaSecili = kutu.querySelector('.saat-dugme[aria-pressed="true"]');
+    if (!halaSecili && ilkAcik){
+      dugmeler.forEach(function(b){
+        if (b.textContent.trim() === ilkAcik){ b.setAttribute('aria-pressed','true'); seciliSaat.gece = ilkAcik; }
+      });
+    }
+    E('doluNot').hidden = !!ilkAcik;
+  }
+
+  function musaitlikCek(){
+    if (!ETKINLIK.gece.musaitlikVar) return;
+    var u = API + '/api/masa/musaitlik?hotel=sota-alacati&gun=' + ETKINLIK.gece.gun +
+            '&kisi=' + encodeURIComponent(kisi.value);
+    fetch(u).then(function(y){ return y.json(); }).then(function(d){
+      if (d && d.acik_saatler) musaitlikUygula(d.acik_saatler);
+    }).catch(function(){ /* ağ hatasında saatler açık kalsın */ });
+  }
+
+  kisi.addEventListener('change', musaitlikCek);
+
+  saatleriCiz('gece','saatGece');
+  saatleriCiz('brunch','saatBrunch');
+  tazele();
+  musaitlikCek();
+
+  function rezIste(hangi, ad, tel){
+    var e = ETKINLIK[hangi];
+    return fetch(API + '/api/masa/request', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        hotel: 'sota-alacati',
+        day: e.gun,
+        time: seciliSaat[hangi],
+        guests: parseInt(kisi.value, 10),
+        name: ad,
+        phone: tel,
+        occasion: e.vesile,
+        note: E('notu').value.trim(),
+        channel: 'halloween'
+      })
+    }).then(function(y){ return y.json(); });
+  }
+
+  E('rezForm').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var ad = E('ad').value.trim();
+    var tel = E('tel').value.trim();
+    var h = E('hata');
+    var dugme = E('gonder');
+
+    if (ad.split(' ').filter(Boolean).length < 2){
+      h.textContent = 'Lütfen ad ve soyadınızı yazın.';
+      E('ad').focus(); return;
+    }
+    if (tel.replace(/\D/g,'').length < 10){
+      h.textContent = 'Telefon numarası eksik görünüyor.';
+      E('tel').focus(); return;
+    }
+    h.textContent = '';
+    dugme.disabled = true;
+    dugme.textContent = 'Masanız ayrılıyor…';
+
+    var sira = [];
+    if (secili.gece)   sira.push('gece');
+    if (secili.brunch) sira.push('brunch');
+
+    var sonuc = [];
+    var zincir = Promise.resolve();
+    sira.forEach(function(hangi){
+      zincir = zincir.then(function(){
+        return rezIste(hangi, ad, tel).then(function(d){
+          sonuc.push({ hangi: hangi, veri: d || {} });
+        }).catch(function(){
+          sonuc.push({ hangi: hangi, veri: { ok:false, error:'ag' } });
+        });
+      });
+    });
+
+    zincir.then(function(){
+      var basarili = sonuc.filter(function(s){ return s.veri.ok; });
+
+      if (!basarili.length){
+        var ilk = sonuc[0] && sonuc[0].veri;
+        h.textContent = (ilk && (ilk.mesaj || ilk.error === 'masa_yok'
+            ? 'Bu saatte boş masamız kalmadı. Başka bir saat seçebilir ya da 0533 367 99 51’den bize ulaşabilirsiniz.'
+            : 'Rezervasyon alınamadı, lütfen tekrar deneyin.'))
+          || 'Rezervasyon alınamadı, lütfen tekrar deneyin.';
+        dugme.disabled = false;
+        dugme.textContent = 'Masamı ayır';
+        musaitlikCek();
+        return;
+      }
+
+      var satirlar = [];
+      basarili.forEach(function(s){
+        var e = ETKINLIK[s.hangi];
+        satirlar.push([
+          s.hangi === 'gece' ? 'Gece partisi' : 'Brunch',
+          e.etiket.split(' ').slice(0,2).join(' ') + ' · ' + seciliSaat[s.hangi]
+        ]);
+      });
+      satirlar.push(['Kişi', kisi.value + ' kişi']);
+      satirlar.push(['Ad', ad]);
+
+      var ozet = E('ozet');
+      ozet.innerHTML = '';
+      satirlar.forEach(function(p){
+        var d = document.createElement('div');
+        var a = document.createElement('span'); a.textContent = p[0];
+        var b = document.createElement('span'); b.textContent = p[1];
+        d.appendChild(a); d.appendChild(b);
+        ozet.appendChild(d);
+      });
+
+      // Kod, sistemin açtığı gerçek kayıttan gelir — uydurulmaz.
+      var kodlar = basarili.map(function(s){ return s.veri.id; }).filter(Boolean);
+      E('rezKod').innerHTML = kodlar.length
+        ? 'Rezervasyon kodunuz: <b>' + kodlar.join('</b> · <b>') + '</b>'
+        : '';
+
+      // Biri açıldı, diğeri açılamadıysa misafir bunu bilsin.
+      if (basarili.length < sonuc.length){
+        var eksik = sonuc.filter(function(s){ return !s.veri.ok; })[0];
+        E('eksikNot').textContent = (eksik.hangi === 'gece'
+          ? '31 Ekim gece partisi için seçtiğiniz saat dolmuş görünüyor.'
+          : '1 Kasım brunch için seçtiğiniz saat dolmuş görünüyor.')
+          + ' Bunun için 0533 367 99 51’den bize ulaşabilirsiniz.';
+        E('eksikNot').hidden = false;
+      }
+
+      E('rezForm').style.display = 'none';
+      E('onay').classList.add('acik');
+      E('onay').scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+})();
+</script>
