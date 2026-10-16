@@ -400,6 +400,19 @@ textarea{resize:vertical;min-height:70px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
 }
+
+/* MOBİLDE EN KÜÇÜK YAZILAR BÜYÜR (Serdar, 16 Eki 2026: "yazılar çok küçük olmuş").
+   Asıl sebep viewport etiketinin olmamasıydı — sayfa 980px açılıp küçülüyordu.
+   O düzeldi; yine de 11px altı etiketler telefonda sınırda kalıyor. */
+@media (max-width:520px){
+  .eyebrow     { font-size:.80rem }
+  .alt-marka   { font-size:.78rem }
+  .etk-tarih   { font-size:.84rem }
+  .secim-notu  { font-size:.82rem }
+  .etiket-metin{ font-size:.84rem }
+  label        { font-size:.82rem }
+  small        { font-size:.78rem }
+}
 </style>
 
 <div class="isik" aria-hidden="true"></div>
