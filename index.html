@@ -625,11 +625,11 @@ textarea{resize:vertical;min-height:70px}
 
       <div class="satir">
         <div class="alan">
-          <label for="kisi">Kaç kişi</label>
+          <label for="kisi">Kaç yetişkin</label>
           <select id="kisi" name="kisi"></select>
         </div>
         <div class="alan" id="cocukAlan" hidden>
-          <label for="cocuk">Kaçı çocuk</label>
+          <label for="cocuk">Kaç çocuk</label>
           <select id="cocuk" name="cocuk"></select>
         </div>
       </div>
@@ -806,38 +806,53 @@ textarea{resize:vertical;min-height:70px}
     kisi.appendChild(o);
   });
 
+  /* ⚠️ İKİ AYRI SORU (Serdar, 16 Eki 2026: "kaç kişi, kaçı çocuk falan diyor,
+     bir tuhaf"). Önce toplam kişi sorulup sonra "kaçı çocuk" denmesi misafiri
+     düşündürüyordu. Artık yetişkin ve çocuk BAĞIMSIZ soruluyor; toplam kişi
+     ikisinin toplamı. Çocuk listesi yetişkin sayısından etkilenmez. */
   function cocukSecenekleri(){
-    var k = parseInt(kisi.value, 10) || 1;
     var mevcut = parseInt(E('cocuk').value, 10) || 0;
     E('cocuk').innerHTML = '';
-    for (var i = 0; i <= k; i++){
+    for (var i = 0; i <= 6; i++){
       var o = document.createElement('option');
       o.value = String(i);
       o.textContent = i === 0 ? 'Çocuk yok' : i + ' çocuk';
-      if (i === Math.min(mevcut, k)) o.selected = true;
+      if (i === mevcut) o.selected = true;
       E('cocuk').appendChild(o);
     }
+  }
+
+  /* Toplam kişi: gece partisi YETİŞKİN etkinliği (işletme teyidi, 13 Eki:
+     "Parti yetişkinler için gece olacak"), çocuk yalnız brunch'a sayılır. */
+  function cocukSayisi(){ return parseInt(E('cocuk').value, 10) || 0; }
+  function yetiskinSayisi(){ return parseInt(kisi.value, 10) || 1; }
+  function toplamKisi(){
+    return yetiskinSayisi() + (secili.brunch ? cocukSayisi() : 0);
   }
 
   /* Temel paket İKİ KİŞİ 4.000 TL — yetişkin/çocuk ayrımı yok.
      Üçüncü kişiden itibaren: yetişkin +2.000, çocuk +1.500.
      İşletme teyidi (13 Eki): 2 yetişkin + 1 çocuk = 5.500 TL. */
-  function brunchTutar(kisiSayisi, cocuk){
-    var k = Math.max(1, kisiSayisi);
-    if (k <= 2) return UCRET.brunchTemel;
-    var yetiskin = Math.max(0, k - cocuk);
-    var ekCocuk = Math.max(0, Math.min(cocuk, k - 2));
-    var ekYetiskin = Math.max(0, (k - 2) - ekCocuk);
-    return UCRET.brunchTemel + ekCocuk*UCRET.brunchEkCocuk + ekYetiskin*UCRET.brunchEkYetiskin;
+  function brunchTutar(yetiskin, cocuk){
+    var toplam = Math.max(1, yetiskin + cocuk);
+    if (toplam <= 2) return UCRET.brunchTemel;
+    /* Temel pakete ÖNCE yetişkinler girer — işletmenin verdiği 5.500 rakamı
+       (2 yetişkin + 1 çocuk) ancak böyle tutuyor: 4.000 + ilave çocuk 1.500. */
+    var paketteYetiskin = Math.min(yetiskin, 2);
+    var paketteCocuk = 2 - paketteYetiskin;
+    var ekYetiskin = yetiskin - paketteYetiskin;
+    var ekCocuk = Math.max(0, cocuk - paketteCocuk);
+    return UCRET.brunchTemel + ekYetiskin*UCRET.brunchEkYetiskin
+                             + ekCocuk*UCRET.brunchEkCocuk;
   }
 
   function hesapla(){
-    var k = parseInt(kisi.value, 10) || 1;
+    var y = yetiskinSayisi(), c = cocukSayisi();
     var toplam = 0;
     if (secili.gece)
-      toplam += k * (menuTipi === 'yemekli' ? UCRET.geceYemekli : UCRET.geceYemeksiz);
+      toplam += y * (menuTipi === 'yemekli' ? UCRET.geceYemekli : UCRET.geceYemeksiz);
     if (secili.brunch)
-      toplam += brunchTutar(k, parseInt(E('cocuk').value, 10) || 0);
+      toplam += brunchTutar(y, c);
     E('toplamDeger').innerHTML = tl(toplam) +
       (secili.gece && secili.brunch ? '<small>iki gün birlikte</small>' : '');
   }
@@ -927,7 +942,7 @@ textarea{resize:vertical;min-height:70px}
   function musaitlikCek(){
     if (!ETKINLIK.gece.musaitlikVar) return;
     fetch(API + '/api/masa/musaitlik?hotel=sota-alacati&gun=' + ETKINLIK.gece.gun +
-          '&kisi=' + encodeURIComponent(kisi.value))
+          '&kisi=' + encodeURIComponent(String(toplamKisi())))
       .then(function(y){ return y.json(); })
       .then(function(d){ if (d && d.acik_saatler) musaitlikUygula(d.acik_saatler); })
       .catch(function(){});
@@ -943,15 +958,18 @@ textarea{resize:vertical;min-height:70px}
 
   function rezIste(hangi, ad, tel){
     var e = ETKINLIK[hangi];
-    var k = parseInt(kisi.value, 10);
-    var cocuk = parseInt(E('cocuk').value, 10) || 0;
+    var y = yetiskinSayisi(), cocuk = cocukSayisi();
+    /* Deftere giden kişi sayısı: gecede yalnız yetişkin (parti yetişkin
+       etkinliği), brunch'ta yetişkin + çocuk. */
+    var k = (hangi === 'gece') ? y : (y + cocuk);
     var vesile, tutar;
     if (hangi === 'gece'){
       vesile = e.vesile + ' — ' + (menuTipi === 'yemekli' ? 'Yemekli menü' : 'Yemeksiz menü');
-      tutar = k * (menuTipi === 'yemekli' ? UCRET.geceYemekli : UCRET.geceYemeksiz);
+      tutar = y * (menuTipi === 'yemekli' ? UCRET.geceYemekli : UCRET.geceYemeksiz);
     } else {
-      vesile = e.vesile + (cocuk > 0 ? ' — ' + cocuk + ' çocuk' : '');
-      tutar = brunchTutar(k, cocuk);
+      vesile = e.vesile + ' — ' + y + ' yetişkin'
+             + (cocuk > 0 ? ', ' + cocuk + ' çocuk' : ', çocuk yok');
+      tutar = brunchTutar(y, cocuk);
     }
     var notlar = [];
     if (E('notu').value.trim()) notlar.push(E('notu').value.trim());
@@ -1009,8 +1027,8 @@ textarea{resize:vertical;min-height:70px}
         return;
       }
 
-      var k = parseInt(kisi.value, 10);
-      var cocuk = parseInt(E('cocuk').value, 10) || 0;
+      var k = yetiskinSayisi() + (secili.brunch ? cocukSayisi() : 0);
+      var cocuk = cocukSayisi();
       var satirlar = [], tutar = 0;
 
       basarili.forEach(function(s){
